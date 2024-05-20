@@ -7,13 +7,11 @@ let start = false;
 let level = 0;
 
 let btns = document.querySelectorAll('.col');
-console.dir(btns);
 for (btn of btns) {
     btn.addEventListener("click", buttonPressed);
 } 
 
 function onstart () {
-    console.log(start);
     if (start === false) {
         start = true;
         leveup();
@@ -32,7 +30,7 @@ function leveup() {
     level++;
     count =-1;
     userseq = [];
-    let randBtnIdx = Math.floor(Math.random() * 3);
+    let randBtnIdx = Math.floor(Math.random() * 4);
     let randBtn = document.querySelector(`.${chance[randBtnIdx]}`);
     gameseq.push(randBtnIdx);
     blink(randBtn);
@@ -60,9 +58,6 @@ function buttonPressed(event) {
         userseq.push(idx);
         count++ ;
         
-        console.log(gameseq.length-1);
-        console.log(count);
-
         if(count < gameseq.length && !checkUserchoice(count)){
             gameOver();
         }
@@ -79,9 +74,6 @@ function buttonPressed(event) {
 
 
 function checkUserchoice(i) {
-    console.log("user sequence " + userseq);
-    console.log("Game sequence " + gameseq);
-
     if(gameseq[i]!=userseq[i])
         return false;
     
@@ -90,7 +82,6 @@ function checkUserchoice(i) {
 
 function gameOver() {
     let h4 = document.querySelector('h4');
-    console.dir(h4);
     h4.innerHTML = `Game Over ! your score is ${level} <br> Please press any button to start the same`;
     start = false;
     gameseq = [];
